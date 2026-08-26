@@ -1,0 +1,6 @@
+{
+  "name": "StudyAI",
+  "description": "AI-powered student learning platform to discover courses, track progress, take AI quizzes, prepare for exams, and build job-ready skills.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
