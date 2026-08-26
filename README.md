@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div align="center">
 <img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
 </div>
@@ -29,3 +30,6 @@ View your app in AI Studio: https://ai.studio/apps/4f69f044-554e-493c-9ae9-4759d
    `npm run dev`
 
 On Windows, both services can be started together with `npm run dev:all`. Open `http://localhost:3000` after the frontend starts.
+=======
+# studyai-platform
+>>>>>>> 70568d278cd37e4e1c440b8fbae41a5558f53ddd
