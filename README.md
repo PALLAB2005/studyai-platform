@@ -342,7 +342,7 @@ The AI assistant can:
 
 ---
 
-## 📝 AI Quiz Generator
+## 📝 AI Quiz Generator:
 
 Students can generate quizzes after learning a topic.
 
@@ -424,7 +424,7 @@ Quiz & Revision
 
 ---
 
-# 💼 Career Assistant
+# 💼 Career Assistant:
 
 Students can select a career goal.
 
@@ -457,7 +457,7 @@ Relevant YouTube Videos
 
 ---
 
-# 🎤 Interview Preparation
+# 🎤 Interview Preparation:
 
 StudyAI can assist students with job preparation.
 
@@ -473,7 +473,7 @@ Features can include:
 
 ---
 
-# 📚 Learning Management
+# 📚 Learning Management:
 
 ## 🔖 Bookmarks
 
@@ -493,7 +493,7 @@ My Bookmarks
 
 ---
 
-## 📝 Personal Notes
+## 📝 Personal Notes:
 
 Students can create notes while watching a video.
 
@@ -510,7 +510,7 @@ Notes can be connected to specific videos.
 
 ---
 
-## 🕒 Watch History
+## 🕒 Watch History:
 
 The platform stores recently watched videos.
 
@@ -526,7 +526,7 @@ Recently Watched
 
 ---
 
-## 📈 Learning Progress
+## 📈 Learning Progress:
 
 Students can track:
 
