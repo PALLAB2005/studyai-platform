@@ -168,7 +168,7 @@ into one centralized student learning platform.
 
 ---
 
-# ✨ Key Features
+# ✨ Key Features:
 
 ## 🎥 YouTube-Powered Learning
 
@@ -197,7 +197,7 @@ The backend communicates with the YouTube Data API and returns relevant real vid
 
 ---
 
-## 🔍 Smart Search
+## 🔍 Smart Search:
 
 Search flow:
 
