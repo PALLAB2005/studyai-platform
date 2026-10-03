@@ -227,7 +227,7 @@ No hardcoded video list should be used.
 
 ---
 
-## 📺 Watch Videos Inside the Platform
+## 📺 Watch Videos Inside the Platform:
 
 When a student clicks a video:
 
