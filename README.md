@@ -104,7 +104,7 @@ The student must decide:
 
 ---
 
-## 2. Multiple Platforms
+## 2. Multiple Platforms:
 
 Students often use different platforms for different activities.
 
@@ -121,7 +121,7 @@ This creates a fragmented learning experience.
 
 ---
 
-## 3. Lack of Personalized Assistance
+## 3. Lack of Personalized Assistance:
 
 Students often have questions such as:
 
@@ -136,7 +136,7 @@ StudyAI aims to solve these problems by combining learning content, AI assistanc
 
 ---
 
-# 💡 Solution
+# 💡 Solution:
 
 StudyAI combines:
 
