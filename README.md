@@ -258,7 +258,7 @@ The video page includes:
 
 ---
 
-## 🌐 Language Filter
+## 🌐 Language Filter:
 
 Students can filter search results by language.
 
