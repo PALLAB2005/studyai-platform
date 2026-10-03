@@ -4,7 +4,7 @@
 
 ---
 
-## 📌 Table of Contents
+## 📌 Table of Contents:
 
 - About StudyAI
 - Problem Statement
@@ -30,7 +30,7 @@
 
 ---
 
-# 📖 About StudyAI
+# 📖 About StudyAI:
 
 **StudyAI** is an AI-powered student learning platform designed to provide a centralized environment for learning, exam preparation, skill development, career preparation, and productivity.
 
@@ -77,7 +77,7 @@ Students can watch the selected video inside the StudyAI platform using the offi
 
 ---
 
-# ❗ Problem Statement
+# ❗ Problem Statement:
 
 Students often face several problems while learning online.
 
