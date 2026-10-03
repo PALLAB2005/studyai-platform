@@ -607,7 +607,7 @@ StudyAI follows a separated frontend and backend architecture.
 
 ---
 
-# 📁 Complete Project Structure
+# 📁 Complete Project Structure:
 
 ```text
 studyai-platform/
