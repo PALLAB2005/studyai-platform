@@ -13,8 +13,7 @@
 
 - About StudyAI
 - Problem Statement
-- So
-- lution
+- Solution
 - Key Features
 - AI Features
 - Learning Management
