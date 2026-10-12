@@ -3,7 +3,7 @@
 > An AI-powered, YouTube-based student learning platform that helps students learn any subject, prepare for exams, improve job-ready skills, generate quizzes, track learning progress, and receive personalized study assistance.
 
 ---
-p
+
 <a href="https://studyai-platform-frontend.vercel.app/">
   <strong>🌐 Live Demo</strong>
 </a>
