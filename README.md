@@ -4,6 +4,10 @@
 
 ---
 
+<a href="https://pallab-portfolio-rosy.vercel.app/">
+  <strong>🌐 Live Demo</strong>
+</a>
+&nbsp;&nbsp;•&nbsp;&nbsp;
 
 ## 📌 Table of Contents:
 
