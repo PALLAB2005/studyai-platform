@@ -3,12 +3,14 @@
 > An AI-powered, YouTube-based student learning platform that helps students learn any subject, prepare for exams, improve job-ready skills, generate quizzes, track learning progress, and receive personalized study assistance.
 
 ---
+🌐 Live Demo
 
 ## 📌 Table of Contents:
 
 - About StudyAI
 - Problem Statement
-- Solution
+- So
+- lution
 - Key Features
 - AI Features
 - Learning Management
