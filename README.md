@@ -287,7 +287,7 @@ The system will prioritize relevant Bengali videos.
 
 ---
 
-## ⏱️ Duration Filter
+## ⏱️ Duration Filter:
 
 Students can filter videos based on duration.
 
@@ -315,9 +315,9 @@ Search results can be sorted by:
 
 ---
 
-# 🤖 AI Features
+# 🤖 AI Features:
 
-## 🧠 AI Study Assistant
+## 🧠 AI Study Assistant:
 
 Students can ask questions about any topic.
 
