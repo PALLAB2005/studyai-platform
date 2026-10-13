@@ -7,7 +7,7 @@
 <a href="https://studyai-platform-frontend.vercel.app/">
   <strong>🌐 Live Demo</strong>
 </a>
-&nbsp;&nbsp;•&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
 
 ## 📌 Table of Contents:
 
