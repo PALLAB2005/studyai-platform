@@ -86,7 +86,7 @@ Students can watch the selected video inside the StudyAI platform using the offi
 
 Students often face several problems while learning online.
 
-## 1. Too Much Content
+## 1. Too Much Content:
 
 YouTube contains millions of educational videos.
 
