@@ -33,34 +33,36 @@ export async function searchYouTubeCourses(
     if (options?.sort) params.set('sort', options.sort);
     const endpoint = `/api/youtube/search?${params.toString()}`;
     const res = await fetch(endpoint);
-    if (!res.ok) throw new Error('YouTube results could not be loaded');
-    if (res.ok) {
-      const data = await res.json();
-      if (Array.isArray(data.items)) {
-        const items: YouTubeVideo[] = data.items.map((item: any) => ({
-          id: item.id || `yt-api-${item.videoId}`,
-          videoId: item.videoId || item.id,
-          title: item.title || item.snippet?.title,
-          channel: item.channel || item.snippet?.channelTitle,
-          channelUrl: item.channelUrl,
-          duration: item.duration || 'Video',
-          thumbnail: item.thumbnail || item.snippet?.thumbnails?.high?.url,
-          videoUrl: item.videoUrl || `https://www.youtube.com/watch?v=${item.videoId || item.id}`,
-          description: item.description || item.snippet?.description || '',
-          publishedDate: item.publishedDate || 'Recently published',
-          source: 'youtube' as const,
-          relevanceReason: 'Top YouTube Search Result',
-          topic: item.topic || query,
-        }));
-
-        return {
-          items,
-          totalResults: data.totalResults || items.length,
-          isMockFallback: false,
-          query,
-        };
-      }
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.error || 'YouTube results could not be loaded');
     }
+    if (!Array.isArray(data.items)) {
+      throw new Error('The YouTube search returned an invalid response');
+    }
+
+    const items: YouTubeVideo[] = data.items.map((item: any) => ({
+      id: item.id || `yt-api-${item.videoId}`,
+      videoId: item.videoId || item.id,
+      title: item.title || item.snippet?.title,
+      channel: item.channel || item.snippet?.channelTitle,
+      channelUrl: item.channelUrl,
+      duration: item.duration || 'Video',
+      thumbnail: item.thumbnail || item.snippet?.thumbnails?.high?.url,
+      videoUrl: item.videoUrl || `https://www.youtube.com/watch?v=${item.videoId || item.id}`,
+      description: item.description || item.snippet?.description || '',
+      publishedDate: item.publishedDate || 'Recently published',
+      source: 'youtube' as const,
+      relevanceReason: 'Top YouTube Search Result',
+      topic: item.topic || query,
+    }));
+
+    return {
+      items,
+      totalResults: data.totalResults || items.length,
+      isMockFallback: false,
+      query,
+    };
   } catch (err) {
     console.warn('YouTube backend unavailable:', err);
     throw err;

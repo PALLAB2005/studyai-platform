@@ -78,9 +78,6 @@ export function SearchResults({
         </div>
       </div>
 
-        {false && <>{/* =========================================================================
-          SECTION 1: StudyAI Courses (Always Displayed First)
-          ========================================================================= */}
       <section className="space-y-5" aria-label="StudyAI Courses">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200/80 dark:border-slate-800 pb-3">
           <div className="flex items-center gap-3">
@@ -142,7 +139,7 @@ export function SearchResults({
             </p>
           </div>
         )}
-      </section></>}
+      </section>
 
       {/* Subtle Section Divider */}
       <div className="relative py-2">
@@ -231,7 +228,7 @@ export function SearchResults({
               <h4 className="text-base font-bold">Unable to Load YouTube Resources</h4>
             </div>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-              Please try again later. You can still explore courses available on StudyAI.
+              {youTubeError} You can still explore courses available on StudyAI.
             </p>
             <div>
               <button

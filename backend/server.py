@@ -140,7 +140,7 @@ class Handler(BaseHTTPRequestHandler):
         options = {key: values[0] for key, values in query.items() if values}
         try:
             self.send_json(200, search_videos(text, options))
-        except (RuntimeError, ValueError) as error:
+        except (RuntimeError, ValueError, yt_dlp.utils.DownloadError) as error:
             self.send_json(502, {"error": str(error)})
 
     def log_message(self, format: str, *args: Any) -> None:

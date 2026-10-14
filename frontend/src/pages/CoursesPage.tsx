@@ -6,6 +6,7 @@ import { YouTubeVideo } from '../types/youtube';
 import { initialNotifications } from '../data/dashboard';
 
 import { searchYouTubeCourses, getRecommendedVideos } from '../services/youtubeService';
+import { searchStudyAICourses } from '../services/courseService';
 
 import { DashboardSidebar } from '../components/dashboard/DashboardSidebar';
 import { DashboardHeader } from '../components/dashboard/DashboardHeader';
@@ -177,7 +178,7 @@ export function CoursesPage() {
             </h1>
 
             <p className="text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed">
-              Search any subject and learn from real educational videos on YouTube, right here.
+              Search any subject to find StudyAI courses and learning videos on YouTube.
             </p>
           </div>
 
@@ -206,7 +207,7 @@ export function CoursesPage() {
             /* Unified Smart Search Results View */
             <SearchResults
               query={activeQuery}
-              studyAICourses={[]}
+              studyAICourses={searchStudyAICourses(activeQuery)}
               youTubeCourses={youTubeVideos}
               isLoadingYouTube={isLoadingYouTube}
               youTubeError={youTubeError}
