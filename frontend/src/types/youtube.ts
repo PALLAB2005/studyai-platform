@@ -19,7 +19,17 @@ export interface YouTubeVideo {
 
 export interface YouTubeSearchResponse {
   items: YouTubeVideo[];
+  playlists: YouTubePlaylist[];
   totalResults: number;
   isMockFallback?: boolean;
   query: string;
+}
+
+export interface YouTubePlaylist {
+  id: string;
+  title: string;
+  channel: string;
+  thumbnail?: string;
+  playlistUrl: string;
+  videoCount?: number;
 }

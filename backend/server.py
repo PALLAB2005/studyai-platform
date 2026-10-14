@@ -11,7 +11,7 @@ import os
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, urlencode, urlparse
 
 import yt_dlp
 
@@ -102,7 +102,36 @@ def search_videos(query: str, options: dict[str, str]) -> dict[str, Any]:
                 "topic": query,
             }
         )
-    return {"items": items, "totalResults": len(items), "query": query}
+    playlist_url = "https://www.youtube.com/results?" + urlencode(
+        {"search_query": f"{search_query} playlist", "sp": "EgIQAw=="}
+    )
+    with yt_dlp.YoutubeDL(ydl_options) as ydl:
+        playlist_data = ydl.extract_info(playlist_url, download=False)
+
+    playlists = []
+    for entry in (playlist_data or {}).get("entries", []):
+        playlist_id = entry.get("id")
+        if not playlist_id:
+            continue
+        playlists.append(
+            {
+                "id": playlist_id,
+                "title": entry.get("title", "YouTube playlist"),
+                "channel": entry.get("channel", entry.get("uploader", "YouTube Channel")),
+                "thumbnail": entry.get("thumbnail"),
+                "playlistUrl": f"https://www.youtube.com/playlist?list={playlist_id}",
+                "videoCount": entry.get("playlist_count"),
+            }
+        )
+        if len(playlists) >= min(limit, 6):
+            break
+
+    return {
+        "items": items,
+        "playlists": playlists,
+        "totalResults": len(items),
+        "query": query,
+    }
 
 
 class Handler(BaseHTTPRequestHandler):

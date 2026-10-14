@@ -2,11 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { AppRoute } from '../types/auth';
-import { YouTubeVideo } from '../types/youtube';
+import { YouTubePlaylist, YouTubeVideo } from '../types/youtube';
 import { initialNotifications } from '../data/dashboard';
 
 import { searchYouTubeCourses, getRecommendedVideos } from '../services/youtubeService';
-import { searchStudyAICourses } from '../services/courseService';
 
 import { DashboardSidebar } from '../components/dashboard/DashboardSidebar';
 import { DashboardHeader } from '../components/dashboard/DashboardHeader';
@@ -36,6 +35,7 @@ export function CoursesPage() {
 
   // YouTube search states
   const [youTubeVideos, setYouTubeVideos] = useState<YouTubeVideo[]>([]);
+  const [youTubePlaylists, setYouTubePlaylists] = useState<YouTubePlaylist[]>([]);
   const [isLoadingYouTube, setIsLoadingYouTube] = useState(false);
   const [youTubeError, setYouTubeError] = useState<string | null>(null);
 
@@ -62,6 +62,7 @@ export function CoursesPage() {
     try {
       const res = await searchYouTubeCourses(term, currentFilters);
       setYouTubeVideos(res.items);
+      setYouTubePlaylists(res.playlists);
     } catch (err: any) {
       console.error('Error fetching YouTube courses:', err);
       setYouTubeError(err.message || 'Unable to load YouTube resources');
@@ -119,6 +120,7 @@ export function CoursesPage() {
     setSearchQuery('');
     setActiveQuery('');
     setYouTubeVideos([]);
+    setYouTubePlaylists([]);
     setYouTubeError(null);
   };
 
@@ -178,7 +180,7 @@ export function CoursesPage() {
             </h1>
 
             <p className="text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed">
-              Search any subject to find StudyAI courses and learning videos on YouTube.
+              Search any subject to find recommended YouTube videos and playlists.
             </p>
           </div>
 
@@ -207,8 +209,8 @@ export function CoursesPage() {
             /* Unified Smart Search Results View */
             <SearchResults
               query={activeQuery}
-              studyAICourses={searchStudyAICourses(activeQuery)}
               youTubeCourses={youTubeVideos}
+              youTubePlaylists={youTubePlaylists}
               isLoadingYouTube={isLoadingYouTube}
               youTubeError={youTubeError}
               onRetryYouTube={() => executeYouTubeSearch(activeQuery, selectedCategory)}

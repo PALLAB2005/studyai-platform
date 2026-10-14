@@ -1,4 +1,4 @@
-import { YouTubeVideo, YouTubeSearchResponse } from '../types/youtube';
+import { YouTubePlaylist, YouTubeVideo, YouTubeSearchResponse } from '../types/youtube';
 
 /**
  * YouTube API Service Layer.
@@ -37,7 +37,7 @@ export async function searchYouTubeCourses(
     if (!res.ok) {
       throw new Error(data.error || 'YouTube results could not be loaded');
     }
-    if (!Array.isArray(data.items)) {
+    if (!Array.isArray(data.items) || !Array.isArray(data.playlists)) {
       throw new Error('The YouTube search returned an invalid response');
     }
 
@@ -57,8 +57,18 @@ export async function searchYouTubeCourses(
       topic: item.topic || query,
     }));
 
+    const playlists: YouTubePlaylist[] = data.playlists.map((playlist: YouTubePlaylist) => ({
+      id: playlist.id,
+      title: playlist.title,
+      channel: playlist.channel,
+      thumbnail: playlist.thumbnail,
+      playlistUrl: playlist.playlistUrl,
+      videoCount: playlist.videoCount,
+    }));
+
     return {
       items,
+      playlists,
       totalResults: data.totalResults || items.length,
       isMockFallback: false,
       query,
