@@ -1,8 +1,15 @@
 import { YouTubePlaylist, YouTubeVideo, YouTubeSearchResponse } from '../types/youtube';
 
+const configuredBackendUrl = import.meta.env.VITE_BACKEND_URL?.trim();
+const backendUrl = configuredBackendUrl
+  ? configuredBackendUrl.replace(/\/+$/, '')
+  : import.meta.env.DEV
+    ? ''
+    : 'https://studyai-platform-production.up.railway.app';
+
 /**
  * YouTube API Service Layer.
- * The browser calls the app backend so the YouTube API key never enters the
+ * The browser calls the backend so server-side integrations stay out of the
  * client bundle.
  */
 
@@ -11,9 +18,8 @@ const SIMULATED_LATENCY_MS = 350;
 
 /**
  * Searches for YouTube learning resources.
- * The backend endpoint proxies the official YouTube Data API v3. During local
- * development without a backend, it returns an empty result rather than
- * showing unrelated hardcoded content.
+ * Local development uses the Vite proxy; production defaults to the deployed
+ * Railway backend. VITE_BACKEND_URL can override either target.
  */
 export async function searchYouTubeCourses(
   query: string,
@@ -31,7 +37,7 @@ export async function searchYouTubeCourses(
     if (options?.language) params.set('language', options.language);
     if (options?.duration) params.set('duration', options.duration);
     if (options?.sort) params.set('sort', options.sort);
-    const endpoint = `/api/youtube/search?${params.toString()}`;
+    const endpoint = `${backendUrl}/api/youtube/search?${params.toString()}`;
     const res = await fetch(endpoint);
     const data = await res.json();
     if (!res.ok) {
