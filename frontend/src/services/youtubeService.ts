@@ -77,13 +77,6 @@ export async function searchYouTubeCourses(
     console.warn('YouTube backend unavailable:', err);
     throw err;
   }
-
-  return {
-    items: [],
-    totalResults: 0,
-    isMockFallback: false,
-    query,
-  };
 }
 
 /**
