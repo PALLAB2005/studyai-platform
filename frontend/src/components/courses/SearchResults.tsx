@@ -1,26 +1,21 @@
 import React, { useState } from 'react';
-import { Course } from '../../types/course';
-import { YouTubeVideo } from '../../types/youtube';
-import { StudyAICourseCard } from './StudyAICourseCard';
+import { YouTubePlaylist, YouTubeVideo } from '../../types/youtube';
 import { YouTubeCourseCard } from './YouTubeCourseCard';
 import {
-  GraduationCap,
   Youtube,
   AlertCircle,
   RotateCcw,
-  Sparkles,
   Search,
-  BookOpen,
-  ArrowRight,
-  ExternalLink,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  ListVideo,
+  Play
 } from 'lucide-react';
 
 interface SearchResultsProps {
   query: string;
-  studyAICourses: Course[];
   youTubeCourses: YouTubeVideo[];
+  youTubePlaylists: YouTubePlaylist[];
   isLoadingYouTube: boolean;
   youTubeError: string | null;
   onRetryYouTube: () => void;
@@ -29,28 +24,21 @@ interface SearchResultsProps {
 
 export function SearchResults({
   query,
-  studyAICourses,
   youTubeCourses,
+  youTubePlaylists,
   isLoadingYouTube,
   youTubeError,
   onRetryYouTube,
   onClearSearch,
 }: SearchResultsProps) {
-  const [showAllStudyAI, setShowAllStudyAI] = useState(false);
   const [showAllYouTube, setShowAllYouTube] = useState(false);
 
-  const initialStudyAILimit = 6;
   const initialYouTubeLimit = 4;
-
-  const visibleStudyAICourses = showAllStudyAI
-    ? studyAICourses
-    : studyAICourses.slice(0, initialStudyAILimit);
 
   const visibleYouTubeCourses = showAllYouTube
     ? youTubeCourses
     : youTubeCourses.slice(0, initialYouTubeLimit);
 
-  const hasStudyAICourses = studyAICourses.length > 0;
   const hasYouTubeCourses = youTubeCourses.length > 0;
 
   return (
@@ -78,84 +66,6 @@ export function SearchResults({
         </div>
       </div>
 
-      <section className="space-y-5" aria-label="StudyAI Courses">
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200/80 dark:border-slate-800 pb-3">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-brand text-white flex items-center justify-center shadow-xs">
-              <GraduationCap className="w-4 h-4" />
-            </div>
-            <div>
-              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2.5">
-                <span>StudyAI Courses</span>
-                {hasStudyAICourses && (
-                  <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-brand-100 dark:bg-blue-950/70 text-brand-700 dark:text-brand-300">
-                    {studyAICourses.length} Available
-                  </span>
-                )}
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                Structured curriculums and interactive lessons hosted directly on StudyAI
-              </p>
-            </div>
-          </div>
-
-          {hasStudyAICourses && studyAICourses.length > initialStudyAILimit && (
-            <button
-              type="button"
-              id="toggle-all-studyai-courses-btn"
-              onClick={() => setShowAllStudyAI(!showAllStudyAI)}
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300 transition-colors cursor-pointer"
-            >
-              <span>{showAllStudyAI ? 'Show Less' : `View All ${studyAICourses.length} StudyAI Courses`}</span>
-              {showAllStudyAI ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-            </button>
-          )}
-        </div>
-
-        {/* StudyAI Course Results Grid */}
-        {hasStudyAICourses ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {visibleStudyAICourses.map((course) => (
-              <StudyAICourseCard key={course.id} course={course} />
-            ))}
-          </div>
-        ) : (
-          /* NO StudyAI Course Found State (Important Requirement) */
-          <div
-            id="no-studyai-course-notice"
-            className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xs space-y-3"
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200/60 dark:border-amber-800/40">
-              <BookOpen className="w-3.5 h-3.5" />
-              <span>Platform Catalog Notice</span>
-            </div>
-
-            <h4 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">
-              No StudyAI Course Found
-            </h4>
-
-            <p className="text-sm text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
-              We don't currently have a course for <strong className="text-slate-900 dark:text-slate-100 font-semibold">{query}</strong>, but here are recommended YouTube resources from top verified educators below.
-            </p>
-          </div>
-        )}
-      </section>
-
-      {/* Subtle Section Divider */}
-      <div className="relative py-2">
-        <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-slate-200 dark:border-slate-800" />
-        </div>
-        <div className="relative flex justify-center">
-          <span className="bg-slate-50 dark:bg-slate-950 px-4 text-xs uppercase tracking-widest font-bold text-slate-400">
-            Additional Learning Resources
-          </span>
-        </div>
-      </div>
-
-      {/* =========================================================================
-          SECTION 2: Recommended from YouTube
-          ========================================================================= */}
       <section className="space-y-5" aria-label="YouTube Learning Resources">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200/80 dark:border-slate-800 pb-3">
           <div className="flex items-center gap-3">
@@ -228,7 +138,7 @@ export function SearchResults({
               <h4 className="text-base font-bold">Unable to Load YouTube Resources</h4>
             </div>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-              {youTubeError} You can still explore courses available on StudyAI.
+              {youTubeError}
             </p>
             <div>
               <button
@@ -252,15 +162,69 @@ export function SearchResults({
           </div>
         )}
 
-        {/* No YouTube Courses Found Fallback */}
-        {!isLoadingYouTube && !youTubeError && !hasYouTubeCourses && (
+        {/* No YouTube Results Found Fallback */}
+        {!isLoadingYouTube && !youTubeError && !hasYouTubeCourses && youTubePlaylists.length === 0 && (
           <div className="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-center space-y-2">
             <p className="text-sm text-slate-600 dark:text-slate-400">
-              No YouTube videos found matching "{query}". Try searching for standard topics like Python, Web Development, or React.
+              No YouTube videos or playlists found matching "{query}". Try another search.
             </p>
           </div>
         )}
       </section>
+
+      {!isLoadingYouTube && !youTubeError && youTubePlaylists.length > 0 && (
+        <section className="space-y-5" aria-label="YouTube Playlists">
+          <div className="flex items-center gap-3 border-b border-slate-200/80 dark:border-slate-800 pb-3">
+            <div className="w-8 h-8 rounded-xl bg-red-600 text-white flex items-center justify-center">
+              <ListVideo className="w-4 h-4" />
+            </div>
+            <div>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100">
+                YouTube Playlists
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                Learning playlists related to {query}
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {youTubePlaylists.map((playlist) => (
+              <a
+                key={playlist.id}
+                href={playlist.playlistUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="group overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-xs transition-all hover:-translate-y-1 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900"
+              >
+                <div className="relative aspect-video bg-slate-200 dark:bg-slate-800">
+                  {playlist.thumbnail && (
+                    <img
+                      src={playlist.thumbnail}
+                      alt=""
+                      className="h-full w-full object-cover"
+                      referrerPolicy="no-referrer"
+                    />
+                  )}
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg">
+                      <Play className="ml-0.5 h-5 w-5 fill-current" />
+                    </span>
+                  </div>
+                  <span className="absolute bottom-3 right-3 rounded-md bg-black/80 px-2 py-1 text-xs font-semibold text-white">
+                    {playlist.videoCount ? `${playlist.videoCount} videos` : 'Playlist'}
+                  </span>
+                </div>
+                <div className="space-y-2 p-5">
+                  <h4 className="line-clamp-2 font-bold text-slate-900 transition-colors group-hover:text-red-600 dark:text-slate-100 dark:group-hover:text-red-400">
+                    {playlist.title}
+                  </h4>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">{playlist.channel}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }
