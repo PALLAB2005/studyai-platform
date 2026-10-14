@@ -2,22 +2,22 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Custom brand yellow accent: #FBFF1F */
+/* Trust-focused blue palette for primary actions and learning navigation. */
 @theme {
-  --color-brand: #FBFF1F;
-  --color-brand-dark: #E5E800;
-  --color-brand-light: #FDFFA6;
-  --color-brand-50: #FEFFD6;
-  --color-brand-100: #FDFFA6;
-  --color-brand-200: #FCFF7A;
-  --color-brand-300: #FBFF4D;
-  --color-brand-400: #FBFF1F;
-  --color-brand-500: #E5E800;
-  --color-brand-600: #B3B500;
-  --color-brand-700: #808200;
-  --color-brand-800: #4D4E00;
-  --color-brand-900: #1A1A00;
-  --color-brand-950: #0D0D00;
+  --color-brand: #2563EB;
+  --color-brand-dark: #1D4ED8;
+  --color-brand-light: #93C5FD;
+  --color-brand-50: #EFF6FF;
+  --color-brand-100: #DBEAFE;
+  --color-brand-200: #BFDBFE;
+  --color-brand-300: #93C5FD;
+  --color-brand-400: #60A5FA;
+  --color-brand-500: #3B82F6;
+  --color-brand-600: #2563EB;
+  --color-brand-700: #1D4ED8;
+  --color-brand-800: #1E40AF;
+  --color-brand-900: #1E3A8A;
+  --color-brand-950: #172554;
 }
 
 @layer base {
