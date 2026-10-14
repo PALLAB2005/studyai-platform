@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import os
+from concurrent.futures import ThreadPoolExecutor
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
@@ -63,8 +64,19 @@ def search_videos(query: str, options: dict[str, str]) -> dict[str, Any]:
         "skip_download": True,
         "extract_flat": True,
     }
-    with yt_dlp.YoutubeDL(ydl_options) as ydl:
-        search_data = ydl.extract_info(f"ytsearch{limit}:{search_query}", download=False)
+    playlist_url = "https://www.youtube.com/results?" + urlencode(
+        {"search_query": f"{search_query} playlist", "sp": "EgIQAw=="}
+    )
+
+    def extract_search(search_url: str) -> dict[str, Any] | None:
+        with yt_dlp.YoutubeDL(ydl_options) as ydl:
+            return ydl.extract_info(search_url, download=False)
+
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        videos_future = executor.submit(extract_search, f"ytsearch{limit}:{search_query}")
+        playlists_future = executor.submit(extract_search, playlist_url)
+        search_data = videos_future.result()
+        playlist_data = playlists_future.result()
 
     entries = [entry for entry in (search_data or {}).get("entries", []) if entry.get("id")]
     duration_filter = options.get("duration", "")
@@ -102,12 +114,6 @@ def search_videos(query: str, options: dict[str, str]) -> dict[str, Any]:
                 "topic": query,
             }
         )
-    playlist_url = "https://www.youtube.com/results?" + urlencode(
-        {"search_query": f"{search_query} playlist", "sp": "EgIQAw=="}
-    )
-    with yt_dlp.YoutubeDL(ydl_options) as ydl:
-        playlist_data = ydl.extract_info(playlist_url, download=False)
-
     playlists = []
     for entry in (playlist_data or {}).get("entries", []):
         playlist_id = entry.get("id")
@@ -164,7 +170,7 @@ class Handler(BaseHTTPRequestHandler):
 
         text = query.get("q", [""])[0].strip()
         if not text:
-            self.send_json(200, {"items": [], "totalResults": 0, "query": text})
+            self.send_json(200, {"items": [], "playlists": [], "totalResults": 0, "query": text})
             return
         options = {key: values[0] for key, values in query.items() if values}
         try:

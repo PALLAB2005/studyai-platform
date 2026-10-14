@@ -105,15 +105,11 @@ export function CoursesPage() {
 
   const handleSearchSubmit = (query: string) => {
     setActiveQuery(query.trim());
-    if (query.trim()) {
-      executeYouTubeSearch(query.trim(), selectedCategory);
-    }
   };
 
   const handleSelectTopic = (topic: string) => {
     setSearchQuery(topic);
     setActiveQuery(topic);
-    executeYouTubeSearch(topic, selectedCategory);
   };
 
   const handleClearSearch = () => {
