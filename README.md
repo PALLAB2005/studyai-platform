@@ -9,6 +9,8 @@
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://github.com/PALLAB2005/PALLAB-PORTFOLIO">
+  <strong>💻 GitHub Repository</strong>
+</a>
   
 </a>
 
