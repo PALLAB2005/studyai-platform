@@ -23,6 +23,7 @@
 - AI Features
 - Learning Management
 - Online Claces
+- Video Tutorial
 - System Architecture
 - Project Structure
 - Frontend Structure
