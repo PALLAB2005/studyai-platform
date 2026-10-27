@@ -1061,7 +1061,7 @@ VideoCard.tsx
 
 ---
 
-## YouTube Search Endpoint
+## YouTube Search Endpoint:
 
 ```text
 GET /api/youtube/search
