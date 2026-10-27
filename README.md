@@ -22,6 +22,7 @@
 - Key Features
 - AI Features
 - Learning Management
+- Online Claces
 - System Architecture
 - Project Structure
 - Frontend Structure
