@@ -1106,7 +1106,7 @@ With filters:
 
 ---
 
-# ▶️ Video Playback
+# ▶️ Video Playback:
 
 When a student clicks a video:
 
